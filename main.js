@@ -23,7 +23,6 @@ const burgerQueue = new Queue("burger", redisOptions);
 
     burgerQueue.processJobs((job, done) => {
         console.log("Preparing the burger!");
-        console.log(job);
         setTimeout(() => {
             try {
                 if (Math.random() < 0.5) {
