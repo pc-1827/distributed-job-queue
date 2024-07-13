@@ -10,29 +10,27 @@ const redisOptions = {
 
 const burgerQueue = new Queue("burger", redisOptions);
 
-(async () => {
-    const jobs = [...new Array(10)].map(() => ({
-        bun: "🍔",
-        cheese: "🧀",
-        toppings: ["🍅", "🫒", "🥒", "🌶️"],
-    }));
+const jobs = [...new Array(10)].map(() => ({
+    bun: "🍔",
+    cheese: "🧀",
+    toppings: ["🍅", "🫒", "🥒", "🌶️"],
+}));
 
-    for (const job of jobs) {
-        await burgerQueue.addJobs(job, { attempt: 3, repeat: { cron: "10 * * * * *" } });
-    }
+for (const job of jobs) {
+    burgerQueue.addJobs(job, { attempt: 3, repeat: { cron: "10 * * * * *" } });
+}
 
-    burgerQueue.processJobs((job, done) => {
-        console.log("Preparing the burger!");
-        setTimeout(() => {
-            try {
-                if (Math.random() < 0.5) {
-                    throw new Error("Failed to prepare the burger!");
-                }
-                console.log("Burger is ready!");
-                done();
-            } catch (error) {
-                done(error);
+burgerQueue.processJobs((job, done) => {
+    console.log("Preparing the burger!");
+    setTimeout(() => {
+        try {
+            if (Math.random() < 0.5) {
+                throw new Error("Failed to prepare the burger!");
             }
-        }, 4000);
-    });
-})();
+            console.log("Burger is ready!");
+            done();
+        } catch (error) {
+            done(error);
+        }
+    }, 4000);
+}, 5);
