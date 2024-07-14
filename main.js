@@ -17,20 +17,20 @@ const jobs = [...new Array(10)].map(() => ({
 }));
 
 for (const job of jobs) {
-    burgerQueue.addJobs(job, { attempt: 3, repeat: { cron: "10 * * * * *" } });
+    burgerQueue.addJobs(job, { attempts: 2, repeat: { cron: "10 * * * * *" } });
 }
 
 burgerQueue.processJobs((job, done) => {
-    console.log("Preparing the burger!");
+    //console.log("Preparing the burger!");
     setTimeout(() => {
         try {
-            if (Math.random() < 0.5) {
+            if (Math.random() < 0.75) {
                 throw new Error("Failed to prepare the burger!");
             }
-            console.log("Burger is ready!");
+            //console.log("Burger is ready!");
             done();
         } catch (error) {
             done(error);
         }
-    }, 4000);
-}, 5);
+    }, 1000);
+}, 1);
