@@ -23,11 +23,19 @@ for (const job of jobs) {
     });
 }
 
+// const job = {
+//     bun: "🍔",
+//     cheese: "🧀",
+//     toppings: ["🍅", "🫒", "🥒", "🌶️"],
+// };
+
+// burgerQueue.addJobs(job, { attempts: 2, repeat: { cron: "1 * * * * *" }, priority : 1});
+
 burgerQueue.processJobs((job, done) => {
     //console.log("Preparing the burger!");
     setTimeout(() => {
         try {
-            if (Math.random() < 0.75) {
+            if (Math.random() < 0.5) {
                 throw new Error("Failed to prepare the burger!");
             }
             //console.log("Burger is ready!");
