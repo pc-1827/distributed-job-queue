@@ -6,34 +6,11 @@ dotenv.config();
 const { REDIS_HOST, REDIS_PORT, REDIS_PASSWORD } = process.env;
 const queueOptions = {
     redis: { host: REDIS_HOST, port: REDIS_PORT, password: REDIS_PASSWORD },
-    limit: {
-        max: 5,
-        duration: 100,
-    },
 };
 
 const burgerQueue = new Queue("burger", queueOptions);
 
-const jobs = [...new Array(10)].map(() => ({
-    bun: "🍔",
-    cheese: "🧀",
-    toppings: ["🍅", "🫒", "🥒", "🌶️"],
-}));
-
-let priority = 10;
-
-for (const job of jobs) {
-    burgerQueue.addJobs(job, { attempts: 2//, repeat: { cron: "10 * * * * *" }, priority : priority--
-    });
-}
-
-// const job = {
-//     bun: "🍔",
-//     cheese: "🧀",
-//     toppings: ["🍅", "🫒", "🥒", "🌶️"],
-// };
-
-// burgerQueue.addJobs(job, { attempts: 2, repeat: { cron: "1 * * * * *" }, priority : 1});
+console.log("Consumers are ready to process the jobs!");
 
 burgerQueue.processJobs((job, done) => {
     //console.log("Preparing the burger!");
