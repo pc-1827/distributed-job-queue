@@ -8,6 +8,9 @@ local jobDataKey = KEYS[3]
 -- Remove the job from active queue
 redis.call('lrem', KEYS[1], 1, ARGV[1])
 
+-- Publish update on the active channel
+redis.call('publish', 'active', 'change')
+
 -- Update job status to completed
 redis.call('hset', KEYS[3], 'status', 'completed')
 
@@ -16,5 +19,8 @@ redis.call('lpush', KEYS[2], ARGV[1])
 
 -- Set the completed time
 redis.call('hset', KEYS[3], 'completedOn', ARGV[2])
+
+-- Publish change to the completed channel
+redis.call('publish', 'completed', 'change')
 
 return true
