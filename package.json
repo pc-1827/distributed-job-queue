@@ -1,4 +1,9 @@
 {
+  "name": "distributed-job-queue",
+  "version": "1.0.0",
+  "scripts": {
+    "test": "mocha"
+  },
   "dependencies": {
     "async-mutex": "^0.5.0",
     "cron-parser": "^4.9.0",
