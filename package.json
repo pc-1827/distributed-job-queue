@@ -1,9 +1,23 @@
 {
   "name": "distributed-job-queue",
   "version": "1.0.0",
-  "scripts": {
-    "test": "mocha"
+  "description": "A fast and robust job processing system based on Redis",
+  "main": "lib/queue.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pc-1827/distributed-job-queue.git"
   },
+  "keywords": [
+    "distributed-job-queue",
+    "job queue",
+    "queue",
+    "async job processing",
+    "redis",
+    "distributed",
+    "nodejs"
+  ],
+  "author": "pc-1827",
+  "license": "MIT",
   "dependencies": {
     "async-mutex": "^0.5.0",
     "cron-parser": "^4.9.0",
