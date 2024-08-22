@@ -1,11 +1,11 @@
 {
   "name": "distributed-job-queue",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "A fast and robust job processing system based on Redis",
   "main": "lib/queue.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/pc-1827/distributed-job-queue.git"
+    "url": "git+https://github.com/pc-1827/distributed-job-queue.git"
   },
   "keywords": [
     "distributed-job-queue",
