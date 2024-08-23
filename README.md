@@ -2,9 +2,13 @@
 
 ### What is Distributed Job Queue?
 
-Distributed Job Queue is a Node.js library that provides a fast and robust job processing system based on Redis.
+Distributed Job Queue is a [Node.js library](https://www.npmjs.com/package/distributed-job-queue) that provides a fast and robust job processing system based on Redis.
 
 While it is possible to implement queues using raw Redis commands, this library offers an API that abstracts away the low-level details and enhances Redis's basic functionality. This allows you to handle more complex use cases with ease.
+
+Refer to [docs](https://github.com/pc-1827/distributed-job-queue/blob/master/docs/REFERENCE.MD) for more information on how to use the library and its features.
+
+You can use the [job-queue-dashboard](https://github.com/pc-1827/job-queue-dashboard) UI for monitoring jobs in the queue.
 
 This project is heavily inspired by [Bull](https://github.com/OptimalBits/bull).
 
