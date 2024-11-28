@@ -1,22 +1,35 @@
--- job_fail.lua
-local jobId = ARGV[1]
+-- fail_job.lua
 local activeQueue = KEYS[1]
 local failedQueue = KEYS[2]
-local jobDataKey = KEYS[3]
+local jobId = ARGV[1]
 
 -- Remove the job from active queue
-redis.call('lrem', KEYS[1], 1, ARGV[1])
-
--- Publish update on the active channel
-redis.call('publish', 'active', 'change')
-
--- Update job status to failed
-redis.call('hset', KEYS[3], 'status', 'failed')
+redis.call('lrem', activeQueue, 1, jobId)
 
 -- Add the job to failed queue
-redis.call('lpush', KEYS[2], ARGV[1])
-
--- Publish change to the failed channel
-redis.call('publish', 'failed', 'change')
+redis.call('lpush', failedQueue, jobId)
 
 return true
+
+-- -- job_fail.lua
+-- local jobId = ARGV[1]
+-- local activeQueue = KEYS[1]
+-- local failedQueue = KEYS[2]
+-- local jobDataKey = KEYS[3]
+
+-- -- Remove the job from active queue
+-- redis.call('lrem', KEYS[1], 1, ARGV[1])
+
+-- -- Publish update on the active channel
+-- redis.call('publish', 'active', 'change')
+
+-- -- Update job status to failed
+-- redis.call('hset', KEYS[3], 'status', 'failed')
+
+-- -- Add the job to failed queue
+-- redis.call('lpush', KEYS[2], ARGV[1])
+
+-- -- Publish change to the failed channel
+-- redis.call('publish', 'failed', 'change')
+
+-- return true
